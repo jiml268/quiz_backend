@@ -5,7 +5,6 @@ const quizController = {
     async getCategories(req, res) {
         try {
         const response = await axios.get('https://opentdb.com/api_category.php')
-    console.log("response",response.data);
 res.status(200).json({
         code: 200,
         Massage: `catogories`,
@@ -21,10 +20,12 @@ res.status(200).json({
     },
     
      async getCatCount(req, res) {
-         try {
-             const { cat_id } = req.body;
-        const response = await axios.get(`https://opentdb.com/api_count.php?category=${cat_id}`)
-    console.log("response",response.data);
+       try {
+          
+         const { cat_id } = req.body;
+         console.log('cat_id', cat_id)
+        const response = await axios.post(`https://opentdb.com/api_count.php?category=${cat_id}`)
+   
 res.status(200).json({
         code: 200,
         Massage: `catogory count`,
@@ -43,14 +44,15 @@ res.status(200).json({
          try {
              const { amount, cat_id, diff } = req.body;
              const difficulty = diff?diff:""
-        const response = await axios.get(`https://opentdb.com/api.php?amount=${amount}&category=${cat_id}&difficulty=${difficulty}`)
+        const response = await axios.post(`https://opentdb.com/api.php?amount=${amount}&category=${cat_id}&difficulty=${difficulty}`)
     console.log("response",response.data);
 res.status(200).json({
         code: 200,
-        Massage: `catogory count`,
+        Massage: `Question`,
         data: response.data,
       });
-    } catch (err) {
+         } catch (err) {
+           console.log("err",err);
       res.status(400).json({
         code: 400,
         Massage: `No Categries were found`,
