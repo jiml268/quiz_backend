@@ -11,9 +11,9 @@ const quizRoutes = require("./routes/quiz");
 // dotEnv.config();
 app.use(cors());
 app.use(express.json());
-app.use("/api/quiz", quizRoutes);
+app.use( quizRoutes);
 // app.use("/api/user", userRoutes);
-// app.use("/api", routes);
+// app.use( routes);
 
 //connecting TO DB
 // getConnection();
