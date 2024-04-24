@@ -11,8 +11,10 @@ const quizRoutes = require("./routes/quiz");
 // dotEnv.config();
 app.use(cors());
 app.use(express.json());
-app.use( quizRoutes);
+app.use("/api/quiz", quizRoutes);
+// app.use( quizRoutes);
 // app.use("/api/user", userRoutes);
+// app.use("/api", routes);
 // app.use( routes);
 
 //connecting TO DB
@@ -24,3 +26,6 @@ const port = 3030
 app.listen(port, () => {
   console.log(`Server is running on ${port}`);
 });
+
+console.log(process.env)
+
