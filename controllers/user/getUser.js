@@ -1,9 +1,13 @@
 const  Quizusers  = require('../../models/users/users');
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
+const {getUseJoiSchema} = require('../../validation/getUser')
 
 const getUser = async (req, res) => {
     try {
+const test = await getUseJoiSchema.validateAsync(req.body);
+
+
         const { userOrPassword, password } = req.body;
         const validUser = await  Quizusers.findOne({
   $or: [
@@ -57,8 +61,11 @@ const getUser = async (req, res) => {
         message: "Login Successful, have fun slimMom!"
     });
     } catch (err) {
-        console.error(err)
-        throw new Error("Error logging in" + err.message)
+       return res.json({
+        status: "Error",
+        data: err,
+        
+    });
     }
 };
 

@@ -1,6 +1,5 @@
 const  Quizusers  = require('../../models/users/users');
 const jwt = require("jsonwebtoken");
-const Joi = require('joi'); 
 const { createUseJoiSchema } = require('../../validation/createUser')
 const bcrypt = require('bcrypt');
 
