@@ -3,7 +3,7 @@ const quizResults = require('../../models/Quizs/quizResults');
 
 const getScores = async (req, res) => {
     try {
-const getAllScores =  await  quizResults.find()
+const getAllScores =  await  quizResults.find().sort({ score: 'desc' }) 
 return res.status(200).json({
                 status: "Score found",
                 code: 200,
