@@ -6,11 +6,15 @@ const quizResultsSchema = new Schema(
             type: String,
             required: true,
         },
-     Category: {
+     category: {
             type: String,
             required: true,
         },
       numOfQuestions: {
+            type: Number,
+            required: true,
+        },
+      numCorrect: {
             type: Number,
             required: true,
         },
@@ -22,4 +26,4 @@ const quizResultsSchema = new Schema(
     { versionKey: false, timestamps: true }
 );
 
-const QuizResults = model(quizResultsSchema);
+module.exports = model('quizResults', quizResultsSchema);

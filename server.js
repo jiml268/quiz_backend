@@ -4,7 +4,9 @@ const dotEnv = require("dotenv");
 const getConnection = require("./config/db");
 const app = express();
 const quizRoutes = require("./routes/quiz");
- const userRoutes = require("./routes/user");
+const userRoutes = require("./routes/user");
+const scoresRoutes = require("./routes/quizScores");
+ 
 // const routes = require("./routes");
 
 //registering middlewares
@@ -13,6 +15,8 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/quiz", quizRoutes);
 app.use("/api/quiz", userRoutes);
+app.use("/api/quiz", scoresRoutes);
+
 // app.use("/api", routes);
 // app.use( routes);
 

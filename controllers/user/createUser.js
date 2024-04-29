@@ -38,7 +38,7 @@ const token = jwt.sign({ username }, process.env.JWT_SECRET, {
        return res.status(201).json({
                 status: "Account Created",
                 code: 201,
-                data: writeNewUser
+                
             });
 
 
