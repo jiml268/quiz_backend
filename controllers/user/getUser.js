@@ -4,39 +4,41 @@ const bcrypt = require('bcrypt');
 const {getUseJoiSchema} = require('../../validation/getUser')
 
 const getUser = async (req, res) => {
+        const test = await getUseJoiSchema.validateAsync(req.body);
+console.log('test', test)
+
+
     try {
-const test = await getUseJoiSchema.validateAsync(req.body);
+        // console.log(test)
 
 
-        const { userOrPassword, password } = req.body;
+        const { userOrEmail, password } = req.body;
+        console.log('userOrEmail'.userOrEmail)
+        console.log('password'. password)
+
         const validUser = await  Quizusers.findOne({
   $or: [
-    { 'username': userOrPassword },
-    { 'email': userOrPassword }
+    { 'username': userOrEmail },
+    { 'email': userOrEmail }
   ]
 }
                 );
-                // const validUser = await  Quizusers.findOne({ 'username': userOrPassword } );
         console.log('validUser', validUser)
 
-        if (validUser.length === 0) {
-            return res.status(404).json({
+        if (!validUser ) {
+            return res.json({
             status: "Not Found",
-            code: 204,
+            code: 404,
             data: {
                 message: "User not found. Please check your email or user name."
             }
         });
         };
-        // const validatePW = await validUser.checkPassword(password);
-        console.log('password', password)
-                console.log('validUser.password', validUser.password)
-
         const validatePW = await bcrypt.compare(password, validUser.password)
             
            console.log('validatePW', validatePW)
         if (!validatePW) {
-             return res.status(401).json({
+             return res.json({
             status: "Unauthorized",
             code: 401,
             data: {
@@ -44,7 +46,7 @@ const test = await getUseJoiSchema.validateAsync(req.body);
             }
         });
         };
-        const token = jwt.sign({ userOrPassword }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ userOrEmail }, process.env.JWT_SECRET, {
             expiresIn: '1h',
         });
         validUser.token = token;
@@ -58,9 +60,10 @@ const test = await getUseJoiSchema.validateAsync(req.body);
         status: "Success",
         code: 200,
         data: req.userData,
-        message: "Login Successful, have fun slimMom!"
+        message: "Login Successful, Enjoy the Qiezes"
     });
     } catch (err) {
+        console.log('err', err)
        return res.json({
         status: "Error",
         data: err,

@@ -4,8 +4,8 @@ const Joi = require('joi')
     const createUseJoiSchema = Joi.object().keys({ 
       
         username: Joi.string() 
-                  .min(3) 
-                  .max(30) 
+                  .min(4) 
+                  .max(20) 
                   .required(), 
                     
         email: Joi.string() 
@@ -15,7 +15,7 @@ const Joi = require('joi')
             .required(),  
         
         password: Joi.string() 
-               .min(6) 
+               .min(8) 
                .max(20) 
                .required(),  
                  

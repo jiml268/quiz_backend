@@ -6,9 +6,22 @@ const bcrypt = require('bcrypt');
 
 const createUser = async (req, res) => {
     const salt = 10
-    try {
+try {
+const test = await createUseJoiSchema.validateAsync(req.body);
+ } catch (err) {
+       return res.status(422).json({
+                status: "Error in sent information",
+                code: 422,
+                data: {
+                    Error: err
+                }
+            });
+    }
 
-        const test = await createUseJoiSchema.validateAsync(req.body);
+
+
+    try {
+console.log('createUser req.body', req.body)
         const { username, email, password } = req.body
         const hashedPassword = await bcrypt.hash(password, salt)        
 console.log('hashedPassword', hashedPassword)
@@ -37,7 +50,8 @@ const token = jwt.sign({ username }, process.env.JWT_SECRET, {
         console.log(writeNewUser)
        return res.status(201).json({
                 status: "Account Created",
-                code: 201,
+           code: 201,
+                data: { email: email,username: username}
                 
             });
 

@@ -3,7 +3,7 @@ const Joi = require('joi')
  
     const getUseJoiSchema = Joi.object().keys({ 
       
-        userOrPassword: Joi.string() 
+        userOrEmail: Joi.string() 
                   .min(3) 
                   .max(30) 
         .required(), 
